@@ -14,7 +14,7 @@ _suma_hasta_n:
     mov ecx, 0      ;El resultado
 
     cmp ebx, 0
-    jle  fin         
+    jle  fin       ;  
 
     ciclo:
     add ecx, ebx
