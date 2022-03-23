@@ -1,32 +1,47 @@
 GLOBAL _start
 section .text
 
-_star:
-    push 6
-    call _suma_hasta_n:
-    pop eax
+_start:
+    push 6              ; n
+    call _suma_hasta_n  ; Llamo a la rutina
     
+    ;mov eax,              ;En eax se pondra el numero en cuestion
+    mov ebx, placeholder        ;En ebx se pondra la direccion de memoria
 
+    call _itoa
+
+    mov ecx, placeholder    ; String
+    mov edx, longitud       ; longitud
+
+    call _print
+
+    mov eax, 1 
+    mov ebx, 0
+    int 80h	 ;exit
 
 _suma_hasta_n:
-    pop eax        ;La direccion de retorno
-    pop ebx         ;n
-    mov ecx, 0      ;El resultado
 
-    cmp ebx, 0
-    jle  fin       ;  
+    push ebp
+    mov ebp, esp        ; Stack frame
 
-    ciclo:
-    add ecx, ebx
-    dec ebx
-    cmp ebx, 0
-    jnz ciclo
+    mov ecx, [ebp + 8]  ; Primer y unico argumento
+    mov eax, 0          ; Aca tengo la sumatoria
 
-    fin:
-    push ecx        ;El resultado a stack
-    push eax        ;La direccion de retorno
+    ciclo_suma_hasta_n:
+    cmp ecx, 0
+    je fin_suma_hasta_n
+    add eax, ecx
+    dec ecx
+    jmp ciclo_suma_hasta_n
+
+    fin_suma_hasta_n: 
+    mov esp, ebp        ; Stack frame
+    pop ebp             ; Stack frame
     ret
 
+
+
+; Codigo de otras rutinas
 
 _itoa:
     pushad      ;hago backup de todos los registros
@@ -81,3 +96,9 @@ _print:
     popf
     popad           ; Restauro registros
     ret
+
+section .data
+longitud equ 2
+
+section .bss
+placeholder resb 16
