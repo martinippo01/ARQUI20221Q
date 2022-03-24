@@ -28,7 +28,7 @@ elif [ -f "./$1/$1.asm"  ]; then
 		exit 1
 	fi
 	
-	./$1 2> error_from_program.txt
+	./$1 1 argumento 2> error_from_program.txt
 	#Check error
 	if [ $? -ne 0 ]; then
 		echo "Hubo un error en ejecucion: " 
