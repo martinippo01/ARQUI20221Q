@@ -2,7 +2,9 @@
 # A simple script
 
 if [ $# -ne 1 ]; then
-	echo "Cantidad Invalida de argumentos\nRecuerde:\n\t1:Archivo .asm"
+	echo "Cantidad Invalida de argumentos"
+	echo "Recuerde:"
+	echo "    1:nombre/nombre.asm"
 elif [ -f "./$1/$1.asm"  ]; then
 	
 	cd ./$1
