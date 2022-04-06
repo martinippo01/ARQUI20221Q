@@ -1,0 +1,16 @@
+nasm -f elf32 main.asm
+gcc -c -m32 hello.c
+gcc -m32 main.o hello.o -o hello
+./hello
+
+
+Si quiero evitar los check de stack: -fno-stack-protector
+
+
+Si quiero la salid assembler
+
+$> gcc -c xxxxxx.c -m32 -fno-dwarf2-cfi-asm -fno-exceptions -S -fno-asynchronous-unwind-tables -masm=intel
+
+Si quiero que gcc no genere la funcion start:
+
+-nostartfiles
