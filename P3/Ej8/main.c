@@ -3,7 +3,8 @@
 int main(int argc, char *argv[]){
 
     for(int i = 0; i < argc; i++){
+        puts("hola");
         puts(argv[i]);
     }
-    return 0;
+    return 1;
 }
