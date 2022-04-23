@@ -20,7 +20,7 @@ main:
 	mov		esi,[ebp+12]	    ; argv  estamos pasando el arreglo
 	cld		                    ; autoincremento de ESI
 .loop:
-	lodsd                       ; eax = [ESI] y  ESI = ESI + 4
+	lodsd                       ; eax = [ESI] y ESI = ESI + 4
 
 
 	push	ecx                 ; backup

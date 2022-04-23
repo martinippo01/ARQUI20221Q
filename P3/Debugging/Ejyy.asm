@@ -10,7 +10,7 @@ main:
      push fmt
      push buffer
      call sprintf
-     and esp, 3*4
+     add esp, 3*4           ; Aca estaba el error, en vez de add estaba and
      push buffer
      call puts
      add esp,4
