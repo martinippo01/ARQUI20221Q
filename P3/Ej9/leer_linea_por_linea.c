@@ -11,5 +11,4 @@ extern int _print(const char *string, int size);
 
 int main(int argc, char* argv[]){
     int fd = open("test.txt", 2 | O_CREAT, 0777);
-    
 }
