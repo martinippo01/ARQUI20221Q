@@ -17,8 +17,8 @@ _start:
     int 80h	 ;exit
 
 _to_upper:
-    pushad
-    pushf
+        pushad
+        pushf
 
     ciclo:
         mov al, [ecx]   ; Copio la letra en al
@@ -29,10 +29,9 @@ _to_upper:
         cmp al, 'z'     ; Comparo con la z
         jg skip         ; Si es mayor que z salteo
         sub al, 32      ; Como se que es minuscula, la paso a mayuscula
-        mov [ecx], al  ; La remplazo en memoria
-
+        mov [ecx], al   ; La remplazo en memoria
     skip:
-        inc ecx         ; Incremento el puntero
+        inc ecx         ; Incremento el puntero (como estoy viendo caracteres de 1 byte, solo incremento en 1)
         jmp ciclo       ; Continuo con el proximo caracter
 
     fin:
