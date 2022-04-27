@@ -1,4 +1,8 @@
 GLOBAL _sleep
+GLOBAL _fork
+GLOBAL _getpid
+GLOBAL _clock_gettime
+GLOBAL _time
 
 
 _sleep:
@@ -27,9 +31,57 @@ _sleep:
     ret
 
 
+_fork:
+    push ebp
+    mov ebp, esp
+
+    mov eax, 2
+    int 80h
+
+    mov esp, ebp
+    pop ebp
+    ret
+
+_time:
+    push ebp
+    mov ebp, esp
+    push ebx
+
+    mov eax, 13
+    mov ebx, [ebp + 8] ; tloc
+    int 80h
+
+    pop ebx
+    mov esp, ebp
+    pop ebp
+    ret
+
+_clock_gettime:
+    push ebp
+    mov ebp, esp
+    push ebx
+
+    mov eax, 265
+    mov ebx, [ebp+8]
+    mov ecx, [ebp+12]
+    int 80h
+
+    pop ebx
+    mov esp, ebp
+    pop ebp
+    ret
 
 
+_getpid:
+    push ebp
+    mov ebp, esp
 
+    mov eax, 20
+    int 80h
+
+    mov esp, ebp
+    pop ebp
+    ret
 
 
 
