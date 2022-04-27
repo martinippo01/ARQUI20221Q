@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<!-- saved from url=(0035)https://alejofl.github.io/syscalls/ -->
+<html lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style data-merge-styles="true"></style>
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>syscalls | System Calls documentation for easy access</title>
+<meta name="generator" content="Jekyll v3.9.2">
+<meta property="og:title" content="syscalls">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="System Calls documentation for easy access">
+<meta property="og:description" content="System Calls documentation for easy access">
+<link rel="canonical" href="https://alejofl.github.io/syscalls/">
+<meta property="og:url" content="https://alejofl.github.io/syscalls/">
+<meta property="og:site_name" content="syscalls">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="syscalls">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","description":"System Calls documentation for easy access","headline":"syscalls","name":"syscalls","url":"https://alejofl.github.io/syscalls/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <style class="anchorjs"></style><link rel="stylesheet" href="./syscalls _ System Calls documentation for easy access_files/style.css">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/syscalls/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body class="vsc-initialized">
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+
+      <h1 id="syscalls">syscalls</h1>
+
+<ul>
+  <li><a href="https://alejofl.github.io/syscalls/cartilla/IntelCodeTable.pdf">Cartilla ASM</a></li>
+</ul>
+
+<h2 id="32-bit">32-bit<a class="anchorjs-link " href="https://alejofl.github.io/syscalls/#32-bit" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h2>
+
+<ul>
+  <li>
+    <p><a href="https://alejofl.github.io/syscalls/x86/">System Calls x86</a></p>
+  </li>
+  <li>
+    <p>Registros
+<img src="./syscalls _ System Calls documentation for easy access_files/x86-registers.png" width="70%"></p>
+  </li>
+  <li>
+    <p><strong>Los argumentos se pasan a las funciones por el Stack</strong></p>
+  </li>
+  <li>Registros a preservar entre funciones
+    <ul>
+      <li>ebx</li>
+      <li>esi</li>
+      <li>edi</li>
+      <li>ebp</li>
+      <li>esp</li>
+    </ul>
+  </li>
+  <li><strong>El valor de retorno se retorna por EAX</strong></li>
+</ul>
+
+<h2 id="64-bit">64-bit<a class="anchorjs-link " href="https://alejofl.github.io/syscalls/#64-bit" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h2>
+
+<ul>
+  <li>
+    <p><a href="https://alejofl.github.io/syscalls/x86_64/">System Calls x86_64</a></p>
+  </li>
+  <li>
+    <p>Registros
+<img src="./syscalls _ System Calls documentation for easy access_files/current2_clip_image002.jpg" width="70%"></p>
+  </li>
+  <li><strong>Los argumentos se pasan a las funciones por parámetros en primera instancia, y luego por el stack</strong>
+    <ul>
+      <li>
+        <p>Clasificación de datos:</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Dato</th>
+              <th>En C</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>INTEGER</td>
+              <td>char, short, int, long, void *</td>
+            </tr>
+            <tr>
+              <td>SSE</td>
+              <td>float, double</td>
+            </tr>
+            <tr>
+              <td>MEMORY</td>
+              <td>datos más grandes que 4 bytes</td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+      <li>
+        <p>Luego se pasan de la siguiente forma:</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Dato</th>
+              <th>Registro (en ese orden)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>INTEGER</td>
+              <td>rdi, rsi, rdx, rcx, r8, r9</td>
+            </tr>
+            <tr>
+              <td>SSE</td>
+              <td>xmm0, xmm1, xmm2, xmm3, xmm4, xmm5, xmm6, xmm7</td>
+            </tr>
+            <tr>
+              <td>MEMORY</td>
+              <td>por Stack</td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+    </ul>
+  </li>
+  <li>Registros a preservar entre funciones
+    <ul>
+      <li>rbp</li>
+      <li>rsp</li>
+      <li>rbx</li>
+      <li>r12</li>
+      <li>r13</li>
+      <li>r15</li>
+    </ul>
+  </li>
+  <li><strong>El valor de retorno se retorna de la siguiente manera</strong>
+    <ul>
+      <li>
+        <p>Si el dato es __, se retorna:</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Dato</th>
+              <th>Se retorna</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>INTEGER</td>
+              <td>rax y rdx</td>
+            </tr>
+            <tr>
+              <td>SSE</td>
+              <td>xmm0 y xmm1</td>
+            </tr>
+            <tr>
+              <td>MEMORY</td>
+              <td>por Stack</td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+
+      
+    </div>
+    <script src="./syscalls _ System Calls documentation for easy access_files/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+  
+
+</body><editor-card style="position:absolute;top:0px;left:0px;z-index:auto;display: block !important"><div dir="ltr" style="all: initial;"><div style="color: initial; font: initial; font-feature-settings: initial; font-kerning: initial; font-optical-sizing: initial; font-variation-settings: initial; forced-color-adjust: initial; text-orientation: initial; text-rendering: initial; -webkit-font-smoothing: initial; -webkit-locale: initial; -webkit-text-orientation: initial; -webkit-writing-mode: initial; writing-mode: initial; zoom: initial; place-content: initial; place-items: initial; place-self: initial; alignment-baseline: initial; animation: initial; appearance: initial; aspect-ratio: initial; backdrop-filter: initial; backface-visibility: initial; background: initial; background-blend-mode: initial; baseline-shift: initial; block-size: initial; border-block: initial; border: initial; border-radius: initial; border-collapse: initial; border-end-end-radius: initial; border-end-start-radius: initial; border-inline: initial; border-start-end-radius: initial; border-start-start-radius: initial; inset: initial; box-shadow: initial; box-sizing: initial; break-after: initial; break-before: initial; break-inside: initial; buffered-rendering: initial; caption-side: initial; caret-color: initial; clear: initial; clip: initial; clip-path: initial; clip-rule: initial; color-interpolation: initial; color-interpolation-filters: initial; color-rendering: initial; color-scheme: initial; columns: initial; column-fill: initial; gap: initial; column-rule: initial; column-span: initial; contain: initial; contain-intrinsic-size: initial; content: initial; content-visibility: initial; counter-increment: initial; counter-reset: initial; counter-set: initial; cursor: initial; cx: initial; cy: initial; d: initial; display: initial; dominant-baseline: initial; empty-cells: initial; fill: initial; fill-opacity: initial; fill-rule: initial; filter: initial; flex: initial; flex-flow: initial; float: initial; flood-color: initial; flood-opacity: initial; grid: initial; grid-area: initial; height: initial; hyphens: initial; image-orientation: initial; image-rendering: initial; inline-size: initial; inset-block: initial; inset-inline: initial; isolation: initial; letter-spacing: initial; lighting-color: initial; line-break: initial; list-style: initial; margin-block: initial; margin: initial; margin-inline: initial; marker: initial; mask: initial; mask-type: initial; max-block-size: initial; max-height: initial; max-inline-size: initial; max-width: initial; min-block-size: initial; min-height: initial; min-inline-size: initial; min-width: initial; mix-blend-mode: initial; object-fit: initial; object-position: initial; offset: initial; opacity: initial; order: initial; origin-trial-test-property: initial; orphans: initial; outline: initial; outline-offset: initial; overflow-anchor: initial; overflow-clip-margin: initial; overflow-wrap: initial; overflow: initial; overscroll-behavior-block: initial; overscroll-behavior-inline: initial; overscroll-behavior: initial; padding-block: initial; padding: initial; padding-inline: initial; page: initial; page-orientation: initial; paint-order: initial; perspective: initial; perspective-origin: initial; pointer-events: initial; position: absolute; quotes: initial; r: initial; resize: initial; ruby-position: initial; rx: initial; ry: initial; scroll-behavior: initial; scroll-margin-block: initial; scroll-margin: initial; scroll-margin-inline: initial; scroll-padding-block: initial; scroll-padding: initial; scroll-padding-inline: initial; scroll-snap-align: initial; scroll-snap-stop: initial; scroll-snap-type: initial; shape-image-threshold: initial; shape-margin: initial; shape-outside: initial; shape-rendering: initial; size: initial; speak: initial; stop-color: initial; stop-opacity: initial; stroke: initial; stroke-dasharray: initial; stroke-dashoffset: initial; stroke-linecap: initial; stroke-linejoin: initial; stroke-miterlimit: initial; stroke-opacity: initial; stroke-width: initial; tab-size: initial; table-layout: initial; text-align: initial; text-align-last: initial; text-anchor: initial; text-combine-upright: initial; text-decoration: initial; text-decoration-skip-ink: initial; text-indent: initial; text-overflow: initial; text-shadow: initial; text-size-adjust: initial; text-transform: initial; text-underline-offset: initial; text-underline-position: initial; touch-action: initial; transform: initial; transform-box: initial; transform-origin: initial; transform-style: initial; transition: initial; user-select: initial; vector-effect: initial; vertical-align: initial; visibility: initial; -webkit-app-region: initial; border-spacing: initial; -webkit-border-image: initial; -webkit-box-align: initial; -webkit-box-decoration-break: initial; -webkit-box-direction: initial; -webkit-box-flex: initial; -webkit-box-ordinal-group: initial; -webkit-box-orient: initial; -webkit-box-pack: initial; -webkit-box-reflect: initial; -webkit-highlight: initial; -webkit-hyphenate-character: initial; -webkit-line-break: initial; -webkit-line-clamp: initial; -webkit-mask-box-image: initial; -webkit-mask: initial; -webkit-mask-composite: initial; -webkit-perspective-origin-x: initial; -webkit-perspective-origin-y: initial; -webkit-print-color-adjust: initial; -webkit-rtl-ordering: initial; -webkit-ruby-position: initial; -webkit-tap-highlight-color: initial; -webkit-text-combine: initial; -webkit-text-decorations-in-effect: initial; -webkit-text-emphasis: initial; -webkit-text-emphasis-position: initial; -webkit-text-fill-color: initial; -webkit-text-security: initial; -webkit-text-stroke: initial; -webkit-transform-origin-x: initial; -webkit-transform-origin-y: initial; -webkit-transform-origin-z: initial; -webkit-user-drag: initial; -webkit-user-modify: initial; white-space: initial; widows: initial; width: initial; will-change: initial; word-break: initial; word-spacing: initial; x: initial; y: initial; z-index: 2147483647;"><link rel="stylesheet" href="chrome-extension://gpaiobkfhnonedkhhfjpmhdalgeoebfa/fonts/fabric-icons.css"><div style="all: initial;"></div></div></div></editor-card></html>

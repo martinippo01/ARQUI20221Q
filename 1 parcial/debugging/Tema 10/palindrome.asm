@@ -81,7 +81,7 @@ yep:
 
             push  number            
             call  printf           
-                   
+            add   sp, 4            
                         
             pop   ecx             
             push  ecx             
@@ -90,11 +90,11 @@ yep:
 exit:       
             mov   ax, 1             
             mov   bx, 0            
-                      
+            int   80h               
 cargo_tope:
           mov ecx,0
           mov ebx,filename
-          mov eax,5
+          mov eax,1
           int 80h
           
 	  mov edx,150
@@ -106,7 +106,7 @@ cargo_tope:
           mov  edi,buffer
           mov  edx,arr
 ciclo:    call atoi  
-	  mov  ecx,eax
+	  mov  ecx,[eax]
 	  ret
 atoi:
          mov eax,0
@@ -130,14 +130,10 @@ convert:
 error:   mov eax, -1
 done:    pop ebx
          ret 	  
-
-
-
-
-
 section  .data
          filename       db "tope.txt",0	  
 section .bss
+
 arr      resb 30
 buffer   resb 150	  	
                                    

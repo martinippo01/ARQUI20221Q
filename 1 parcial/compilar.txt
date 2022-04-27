@@ -1,6 +1,11 @@
-nasm -f elf32 main.asm
-gcc -c -m32 hello.c
-gcc -m32 main.o hello.o -o hello
+______________________________P2____________________________________
+nasm -f elf programa.asm                            ->Objeto del .asm
+ld -melf_i386 programa.o lib.o -o programa_name     -> Linkedicion de uno o multiples .asm
+
+______________________________P3____________________________________
+nasm -f elf32 main.asm                       -> Objeto del .asm
+gcc -c -m32 hello.c                          -> Objeto del .c
+gcc -m32 main.o hello.o -o hello             -> Linkedicion c y asm
 ./hello
 
 

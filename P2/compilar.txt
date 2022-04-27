@@ -1,0 +1,2 @@
+nasm -f elf programa.asm
+ld -melf_i386 programa.o lib.o -o programa_name
